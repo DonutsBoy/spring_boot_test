@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    #driver-class-name:  oracle.jdbc.driver.OracleDriver
+    driver-class-name:  net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    #url:  jdbc:oracle:thin:@127.0.0.1:1521/ORCL
+    url:  jdbc:log4jdbc:oracle:thin:@1.241.253.85:1521/ORCL
+    username: zetswing
+    password: zet112233
+server:
+  port: 8000
+mybatis:
+  mapper-locations: classpath:mappers/**/*.xml # sql mapper 파일위치를 스프링부트에 알려줌 
+logging:
+  level:
+    jdbc.sqlonly: DEBUG # sql 로그를 콘솔에 출력함
+    #org.springframework.web: DEBUG
+    com.zaxxer.hikari.HikariDataSource: ERROR  
+---
+spring:
+  profiles: local
+server:
+  port: 8080
+---
+spring:
+  profiles: dev
+server:
+  port: 8090
+---
+spring:
+  profiles: prod
+server:
+  port: 80

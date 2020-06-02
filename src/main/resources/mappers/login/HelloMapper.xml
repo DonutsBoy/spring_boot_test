@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTDMapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.mapper.HelloMapper">
+	
+	<select id="selectList2" parameterType="java.lang.String" resultType="java.util.HashMap">
+		/* com.example.demo.mapper.HelloMapper.selectList2 */
+		SELECT A
+		      ,B 
+		FROM   TEST1
+		WHERE  1=1
+	</select>
+	
+	<insert id="helloInsert" parameterType="java.util.HashMap">
+		INSERT INTO TEST1 
+		(
+			A,
+			B
+		) 
+		VALUES 
+		(
+			${A},
+			${B}			
+		)
+	</insert>
+	
+	<delete id="helloDelete" parameterType="java.util.HashMap">
+		DELETE FROM TEST1 WHERE ROWNUM = 1
+	</delete>
+	
+</mapper>
