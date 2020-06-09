@@ -18,7 +18,7 @@ import com.example.demo.service.HelloService;
 
 @RestController
 public class HelloController {
-	// 
+	
 	@Autowired
 	HelloService helloService;
 		
