@@ -5,27 +5,95 @@
 	
 	<select id="selectList2" parameterType="java.lang.String" resultType="java.util.HashMap">
 		/* com.example.demo.mapper.HelloMapper.selectList2 */
-		SELECT A
+
+<!-- 		SELECT A
 		      ,B 
 		FROM   TEST1
 		WHERE  1=1
+ -->		
+		SELECT SCREEN_NO FROM GET_SCREEN_NO
 	</select>
 	
 	<insert id="helloInsert" parameterType="java.util.HashMap">
 		INSERT INTO TEST1 
 		(
 			A,
-			B
+			B,
+			C
 		) 
 		VALUES 
 		(
-			${A},
-			${B}			
+			#{A},
+			#{B},
+			#{C}			
 		)
 	</insert>
 	
 	<delete id="helloDelete" parameterType="java.util.HashMap">
 		DELETE FROM TEST1 WHERE ROWNUM = 1
 	</delete>
+	
+	<select id="dayProfitSelect" resultType="java.util.HashMap">
+		/* dayProfitSelect : 일별수익 조회 */
+		SELECT   TRADE_DT /* 거래일자 */
+		       , SUBSTR(TRADE_DT, 1, 4) || '-' || SUBSTR(TRADE_DT, 5, 2) || '-' || SUBSTR(TRADE_DT, 7, 2) AS TRADE_DT2
+		       , TRADE_AMT
+		       , TRADE_PROFIT_LOSS_AFTER_TAX_AMT
+		       , STOCK_RETURN_RATE
+		       , TRADE_CNT
+		FROM     REAL_CONDITION_DAY
+		WHERE    1=1
+		<if test='profitLossGubun == "profit"'> 
+		AND      TRADE_PROFIT_LOSS_AFTER_TAX_AMT > 0
+		</if>			
+		<if test='profitLossGubun == "loss"'> 
+		AND      TRADE_PROFIT_LOSS_AFTER_TAX_AMT <![CDATA[<=]]> 0
+		</if>			
+		ORDER BY TRADE_DT DESC
+		--LIMIT    0, 10
+	</select>
+	
+	<select id="todoList" resultType="java.util.HashMap">
+		/* todoList : 할일 조회 */
+		SELECT   A.ID
+		       , A.TITLE
+		       , A.CHECK_YN
+		FROM     VUEJS_TODO A		
+	</select>
+	
+	<select id="todoInsert" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		/* todoInsert : 할일 조회 */
+		INSERT INTO VUEJS_TODO
+		(
+			TITLE,
+			CHECK_YN
+		)
+		VALUES
+		(
+			#{TITLE},
+			#{CHECK_YN}
+		)		
+	</select>
+	
+	<select id="todoAllDelete" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		/* todoAllDelete : 할일 전체 삭제 */
+		DELETE FROM VUEJS_TODO
+		WHERE  1=1
+	</select>
+
+	<select id="todoDelete" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		/* todoDelete : 할일 전체 삭제 */
+		DELETE FROM VUEJS_TODO
+		WHERE  1=1
+		AND    ID = #{id}
+	</select>
+
+	<select id="todoCheckBoxUpdate" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		/* todoDelete : 할일 삭제 */
+		UPDATE VUEJS_TODO SET
+			   CHECK_YN = #{check_yn}
+		WHERE  1=1
+		AND    ID = #{id}
+	</select>
 	
 </mapper>

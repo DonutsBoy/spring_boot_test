@@ -5,10 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dao.HelloDAO;
 import com.example.demo.mapper.HelloMapper;
@@ -37,6 +36,31 @@ public class HelloServiceImpl implements HelloService {
 	}
 	public void helloInsert() {
 		helloDAO.helloInsert();		
+	}
+	
+	//일별수익 조회
+	public List<Map<String, Object>> dayProfitSelect(Map<String, Object> paramMap) {
+		return helloDAO.dayProfitSelect(paramMap);
+	}
+	
+	public List<Map<String, Object>> todoList() {
+		return helloDAO.todoList();
+	}
+	
+	public void todoInsert(Map<String, Object> paramMap) {
+		helloDAO.todoInsert(paramMap);
+	}
+	
+	public void todoAllDelete() {
+		helloDAO.todoAllDelete();
+	}
+	
+	public void todoDelete(Map<String, Object> paramMap) {
+		helloDAO.todoDelete(paramMap);		
+	}
+	
+	public void todoCheckBoxUpdate(Map<String, Object> paramMap) {
+		helloDAO.todoCheckBoxUpdate(paramMap);		
 	}
 	
 }
