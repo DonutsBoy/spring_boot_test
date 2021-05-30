@@ -153,6 +153,7 @@ export default {
           sortable: false,
           class: 'text-right',
           formatter: value => {
+            //천단위 콤마표시
             var value2 = value;
             value2 = String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             return value2;
@@ -164,6 +165,7 @@ export default {
           sortable: false,
           class: 'text-right',
           formatter: value => {
+            //천단위 콤마표시
             var value2 = value;
             value2 = String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             if (value > 0) {

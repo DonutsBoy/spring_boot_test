@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Header />
+    <div style="height:56px"></div>
 <!--
     <div id="nav">
       <router-link to="/">홈</router-link> |
@@ -27,7 +28,7 @@ export default {
 }
 </script>
 
-<style> 
+<style>
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

@@ -24,6 +24,8 @@
     <!--
     {{ todos }}
     -->
+    <b-overlay :show="show" variant="secondary" opacity="0.40" no-wrap rounded="sm">
+    </b-overlay>        
   </div>
 </template>
 
@@ -31,7 +33,7 @@
 import TodoList from "@/components/TodoList.vue";
 import ComplateTodo from "@/components/ComplateTodo.vue";
 import AddTodo from "@/components/AddTodo.vue";
-import axios from 'axios';
+// import axios from 'axios';
 
 export default {
   mounted() {    
@@ -47,6 +49,7 @@ export default {
   },
   data() {
     return {
+      show: false,
       todo_not_found_msg: "",
       todos: [
         // {
@@ -77,7 +80,7 @@ export default {
       param.TITLE = s1;
       param.CHECK_YN = "N";
 
-      axios.get("/api/todo/insert", {
+      this.$axios.get("/api/todo/insert", {
         params: param
       }).then((response) => {        
         console.log(response.data);
@@ -89,7 +92,8 @@ export default {
         this.$bvToast.toast("할일이 추가되었습니다.", {
             title: "처리 메시지",
             autoHideDelay: 1000,
-            appendToast: true
+            appendToast: true,
+            solid: true,//solid true : 설정되면 반투명이 아닌 단색 배경으로 토스트를 렌더링합니다.
         });
       }).catch((error) => {
         console.log(error);
@@ -104,7 +108,8 @@ export default {
 
     },
     select() {
-      axios.get("/api/todo/list", {
+      this.show = true;
+      this.$axios.get("/api/todo/list", {
         params: {}
       }).then((response) => {
 
@@ -125,7 +130,7 @@ export default {
             checked: response.data[i].CHECK_YN == "Y" ? true : false,
           });
         }  
-
+        this.show = false;
       }).catch((error) => {
         console.log(error);
       });      
@@ -136,7 +141,7 @@ export default {
         return;
       }
 
-      axios.get("/api/todo/allDelete", {
+      this.$axios.get("/api/todo/allDelete", {
         params: {}
       }).then((response) => {
         
@@ -146,7 +151,8 @@ export default {
           this.$bvToast.toast("할일이 전체 삭제되었습니다.", {
             title: '메시지',
             autoHideDelay: 1000, 
-            appendToast: false
+            appendToast: false,
+            solid: true,//solid true : 설정되면 반투명이 아닌 단색 배경으로 토스트를 렌더링합니다.
           });
 
       }).catch((error) => {
@@ -160,7 +166,7 @@ export default {
       let msg1 = "";
       let check_yn = (checked == true ? "Y" : "N");
 
-      axios.get("/api/todo/checkBoxUpdate", {
+      this.$axios.get("/api/todo/checkBoxUpdate", {
         params: {"id": id, "check_yn": check_yn}
       }).then((response) => {
           
@@ -175,7 +181,8 @@ export default {
           this.$bvToast.toast(msg1, {
             title: '메시지',
             autoHideDelay: 1000,
-            appendToast: false
+            appendToast: false,
+            solid: true,//solid true : 설정되면 반투명이 아닌 단색 배경으로 토스트를 렌더링합니다.
           });
 
           //console.log(id, checked);
@@ -188,7 +195,7 @@ export default {
       }).catch((error) => {
           console.log(error);
           alert(error);
-      });  
+      });
 
     },
     clickTitle(id) {
@@ -207,23 +214,24 @@ export default {
         return;
       }
 
-      axios.get("/api/todo/delete", {
+      this.$axios.get("/api/todo/delete", {
         params: {"id": id}
       }).then((response) => {
- 
+
           this.select();
           console.log(response.data);
 
           this.$bvToast.toast("할일이 삭제되었습니다.", {
             title: '메시지',
             autoHideDelay: 1000,
-            appendToast: false
+            appendToast: false,
+            solid: true,//solid true : 설정되면 반투명이 아닌 단색 배경으로 토스트를 렌더링합니다.
           });
 
       }).catch((error) => {
           console.log(error);
           alert(error);
-      });  
+      });
 
       // const index = this.todos.findIndex(todo => {
       //   return todo.id === id;

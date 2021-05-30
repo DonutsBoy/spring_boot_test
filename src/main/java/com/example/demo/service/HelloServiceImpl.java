@@ -7,13 +7,29 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dao.HelloDAO;
 import com.example.demo.mapper.HelloMapper;
 
 @Service
-@Transactional
+//sqlite3 에서 아래로 하면 잘됨
+//@Transactional(isolation=Isolation.DEFAULT)
+
+//sqlite3에서 아래 설정으로 하면 서버에러 500 (Internal Server Error) 리턴함
+//@Transactional(isolation=Isolation.READ_COMMITTED)
+
+//READ_UNCOMMITTED 설명
+//어떤 사용자가 A라는 데이터를 B라는 데이터로 변경하는 동안 다른 사용자는 B라는 
+//아직 완료되지 않은(Uncommitted 혹은 Dirty) 데이터 B를 읽을 수 있다.
+//sqlite3에서 아래 설정으로 하면 서버처리 잘됨
+@Transactional(isolation=Isolation.READ_UNCOMMITTED)
+
+//sqlite3 에서 아래로 하면 서버에서 500 (Internal Server Error) 리턴함
+//@Transactional(isolation=Isolation.REPEATABLE_READ)
+//sqlite3 에서 아래로 하면 잘됨
+//@Transactional(isolation=Isolation.SERIALIZABLE)
 public class HelloServiceImpl implements HelloService {
 
 	@Autowired

@@ -1,29 +1,35 @@
 <template>
-    <v-container>
-      <v-layout row wrap>
-        <v-flex xs6>
-          {{ todoList }}
-        </v-flex>
-        <v-flex xs6>
-          <v-textarea
-            outlined
-            label="할일 입력후 버튼 클릭"
-            value="33333"
-          ></v-textarea>
-          <v-btn>리스트 추가</v-btn>
-        </v-flex>
-      </v-layout>
-    </v-container>
+  <div class="container">
+    <div class="text-center">
+      게시판
+      <b-button variant="primary" @click="logoutBtn">로그아웃</b-button>
+    </div>
+  </div>
 </template>
 
 <script>
+//import axios from 'axios';
+
 export default {
+	mounted() {    
+		this.$nextTick(function () {
+      // 모든 화면이 렌더링된 후 실행합니다.      
+      // if (sessionStorage.getItem("id") == null) {
+      //   sessionStorage.setItem("refer", window.location.pathname);
+      //   this.$router.push('/login');
+      // }
+		})
+	},  
   data() {
     return {
       todoList: ['11','11'],
     } 
-  }
-
+  },
+  methods: {
+    logoutBtn() {
+      this.$store.commit('logoutSession');
+    }
+  },
 }
 </script>
 

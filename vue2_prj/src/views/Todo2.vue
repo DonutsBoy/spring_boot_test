@@ -3,7 +3,7 @@
     <div class="text-center mb-2">
       <img alt="Vue logo" src="../assets/logo.png">
     </div>
-    <h1 class="text-center mb-4">todo 애플리케이션</h1>
+    <h2 class="text-center mb-4">todo 애플리케이션</h2>
     <input type="text" class="form-control" v-model="userInput" @keyup.enter="addTodo" placeholder="할일 입력후 엔터" ref="userInput">
     <!-- @keyup.enter 엔커티를 누르고나면 이벤트 발생 -->
     <div class="list-group mb-4"> <!-- mb-4 는 아래부분과 마진을 준다. -->
