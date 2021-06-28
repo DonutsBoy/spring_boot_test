@@ -1,6 +1,8 @@
 <template>
   <div id="app">
+    <!-- 헤더 컴포넌트 사용 -->    
     <Header />
+    <!-- 상단메뉴 고정일때 사용 -->
     <div style="height:56px"></div>
 <!--
     <div id="nav">
@@ -11,19 +13,24 @@
       <router-link to="/draw">추첨</router-link>
     </div>
 -->    
-    <div style="margin-top:10px;">
-      <router-view />
+    <div style="margin-top:10px;margin-bottom:10px;">
+      <router-view></router-view>
     </div>
+        
+    <!-- 푸터 컴포넌트 사용 -->    
+    <Footer />
   </div>
 </template>
  
 <script>
 import Header from './components/layout/Header.vue';
+import Footer from './components/layout/Footer.vue';
 
 export default {
   name : "App",
   components : {
     Header,
+    Footer,
   }
 }
 </script>

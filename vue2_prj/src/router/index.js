@@ -17,17 +17,18 @@ const requireAuth = () => (to, from, next) => {
   axios.get("/api/login/session/check", {
     params: {}
   }).then((response) => {        
-    console.log("/api/login/session/check : ", response.data);
+    //console.log("/api/login/session/check : ", response.data);
     let loginSuccess = response.data.success;
     //로그인상태
     if(loginSuccess == true) {
+		//window.scrollTo(0,0);//스크롤이 생기는 페이지에서 로그인 페이지로 라우터 이동하면 세로 스크롤 상태로 이동되어서 최상단으로 이동후에 이동한다. 2021-05-25
         return next();//현재 라우터 페이지로 그대로 이동한다.
     //비로그인상태
     } else {
       //sessionStorage.clear();
-      console.log("window.location.pathname : ", window.location.pathname);
-      console.log("from.fullPath : ", from.fullPath);
-      console.log("to.fullPath : ", to.fullPath);
+      //console.log("window.location.pathname : ", window.location.pathname);
+      //console.log("from.fullPath : ", from.fullPath);
+      //console.log("to.fullPath : ", to.fullPath);
       sessionStorage.setItem("refer", to.fullPath);
       //window.scrollTo(0,0);//스크롤이 생기는 페이지에서 로그인 페이지로 라우터 이동하면 세로 스크롤 상태로 이동되어서 최상단으로 이동후에 이동한다. 2021-05-25
       return next('/login');
@@ -41,25 +42,26 @@ const requireAuth = () => (to, from, next) => {
 //토큰 로그인 체크
 const requireAuth2 = () => (to, from, next) => {
   if (store.state.token != "") {
-    console.log("token : ", store.state.token);  
+    //console.log("token : ", store.state.token);  
     axios.get("/api/login/token/check", {
       headers: {
         //"x-access-token": store.state.token
       },
       params: { token: store.state.token }
     }).then((response) => {        
-      console.log("/api/login/token/check : ", response.data);
+      //console.log("/api/login/token/check : ", response.data);
       let loginSuccess = response.data.success;
       //로그인상태
       if(loginSuccess == true) {
+          window.scrollTo(0,0);//스크롤이 생기는 페이지에서 로그인 페이지로 라우터 이동하면 세로 스크롤 상태로 이동되어서 최상단으로 이동후에 이동한다. 2021-05-25
           return next();//현재 라우터 페이지로 그대로 이동한다.
       //비로그인상태
       } else if(loginSuccess == false) {
         store.commit('logoutToken'); //스토어에 token 삭제       
         //sessionStorage.clear();
-        console.log("window.location.pathname", window.location.pathname);
-        console.log("from.fullPath : ", from.fullPath);
-        console.log("to.fullPath : ", to.fullPath);
+        //console.log("window.location.pathname", window.location.pathname);
+        //console.log("from.fullPath : ", from.fullPath);
+        //console.log("to.fullPath : ", to.fullPath);
         sessionStorage.setItem("refer", to.fullPath);
         //window.scrollTo(0,0);//스크롤이 생기는 페이지에서 로그인 페이지로 라우터 이동하면 세로 스크롤 상태로 이동되어서 최상단으로 이동후에 이동한다. 2021-05-25
         return next('/login2');
@@ -71,7 +73,7 @@ const requireAuth2 = () => (to, from, next) => {
   //token 값이 없어서 로그아웃상태라고 판단
   } else {
     sessionStorage.setItem("refer", to.fullPath);
-    window.scrollTo(0,0);//스크롤이 생기는 페이지에서 로그인 페이지로 라우터 이동하면 세로 스크롤 상태로 이동되어서 최상단으로 이동후에 이동한다. 2021-05-25
+    //window.scrollTo(0,0);//스크롤이 생기는 페이지에서 로그인 페이지로 라우터 이동하면 세로 스크롤 상태로 이동되어서 최상단으로 이동후에 이동한다. 2021-05-25
     return next('/login2');
   }
 };
@@ -80,12 +82,14 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home //맨상단 import 부분에 Home 과 매칭된다.
+    component: Home, //맨상단 import 부분에 Home 과 매칭된다.
+    meta: {title: 'Team Member'},    
   },
   {
     path: '/auto/dayprofit',
     name: 'DayProfit',
-    component: DayProfit
+    component: DayProfit,
+    beforeEnter: requireAuth2(), //토큰 로그인 체크    
   },
   {
     path: '/todo',
@@ -104,7 +108,6 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Board.vue'),
-    beforeEnter: requireAuth(), //세션 로그인 체크
   },
   {
     path: '/upbit',
@@ -117,7 +120,7 @@ const routes = [
     //이 함수는 경로에 따라 라우트 매칭을 결정하고 해당 컴포넌트를 생성하기 직전에 호출되는 함수다.
     //여기서 인증 여부를 판단한 뒤 컴포넌틀 랜더링을 진행하거나 혹은 로그인 페이지로 이동하는 등의 로직을 구현하면 된다.   
     //라우터 이동 전 beforeEnter 가 먼저 실행됨.  
-    beforeEnter: requireAuth2(), //토큰 로그인 체크
+    beforeEnter: requireAuth(), //세션 로그인 체크    
   },
   {
     path: '/login',

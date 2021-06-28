@@ -49,13 +49,27 @@
 			<artifactId>ojdbc8</artifactId>
 		</dependency>
 		
-       <!-- MySQL -->
+		<!-- MySQL -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.16</version>
         </dependency>
         		
+		<!-- Apache POI -->
+		<!-- excel xls -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.13</version>
+		</dependency>
+		<!-- excel xlsx -->	
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.13</version>
+		</dependency>
+		        		
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -95,6 +109,13 @@
 		    <version>19.3.0.0</version>
 		</dependency>
 
+		<!-- Apache HttpComponent 클래스 사용 -->
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpclient</artifactId>
+		    <version>4.3.4</version>
+		</dependency>
 				
 	</dependencies>
 

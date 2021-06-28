@@ -26,12 +26,10 @@
       <b-overlay :show="show" variant="secondary" opacity="0.40" no-wrap rounded="sm">
       </b-overlay>        
     </b-card>
-
-    <b-card class="mt-3" header="Form Data Result">
+    <!-- <b-card class="mt-3" header="Form Data Result">
       <pre class="m-0">{{ form }}</pre>
     </b-card>
-    <!-- {{ posts }} -->
-     
+    {{ posts }} -->
   </div>
 </template>
 

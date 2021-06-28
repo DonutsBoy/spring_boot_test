@@ -2,7 +2,28 @@
   <div class="container">
     <div class="text-center">
       게시판
-      <b-button variant="primary" @click="logoutBtn">로그아웃</b-button>
+      <!-- <b-button variant="primary" @click="logoutBtn">로그아웃</b-button> -->
+      sdfdsfdsfdsf<br>
+      sdfdsfdsfdsf<br>      
+      sdfdsfdsfdsf<br>      
+      sdfdsfdsfdsf<br>      
+      sdfdsfdsfdsf<br>      
+      sdfdsfdsfdsf<br>      
+      sdfdsfdsfdsf<br>      
+      sdfdsfdsfdsf<br>      
+      sdfdsfdsfdsf<br>      
+      sdfdsfdsfdsf<br>      
+      sdfdsfdsfdsf<br>      
+      sdfdsfdsfdsf<br>      
+      sdfdsfdsfdsf<br>      
+      sdfdsfdsfdsf<br>      
+      sdfdsfdsfdsf<br>      
+      sdfdsfdsfdsf<br>      
+      sdfdsfdsfdsf<br>      
+      sdfdsfdsfdsf<br>      
+      sdfdsfdsfdsf<br>      
+      sdfdsfdsfdsf<br>      
+      sdfdsfdsfdsf<br>      
     </div>
   </div>
 </template>
@@ -26,9 +47,9 @@ export default {
     } 
   },
   methods: {
-    logoutBtn() {
+/*     logoutBtn() {
       this.$store.commit('logoutSession');
-    }
+    } */
   },
 }
 </script>

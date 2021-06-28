@@ -11,10 +11,11 @@ Vue.prototype.$axios = axios;
 import router from "./router"
 
 //부트스트랩뷰 사용하기
-import BootstrapVue from 'bootstrap-vue'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-Vue.use(BootstrapVue)
+import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
+Vue.use(BootstrapVue);
+Vue.use(IconsPlugin);
 
 //VueMoment 사용하기
 import VueMoment from 'vue-moment' 

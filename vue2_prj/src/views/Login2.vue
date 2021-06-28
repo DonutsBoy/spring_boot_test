@@ -1,7 +1,7 @@
 <template>
   <div class="container">
 <!--     <b-form @submit="onSubmit" @reset="onReset" v-if="show"> -->    
-    <b-card class="mt-3" header="JWT 토큰 로그인">
+    <b-card header="JWT 토큰 로그인">
       <b-form-group id="input-group-2" label="아이디" label-for="input-1">
         <b-form-input
           type="text"
@@ -25,12 +25,10 @@
       <b-overlay :show="show2" variant="info" opacity="0.40" no-wrap rounded="sm">
       </b-overlay>        
     </b-card>
-    
-    <b-card class="mt-3" header="Form Data Result">
+<!--     <b-card class="mt-3" header="Form Data Result">
       <pre class="m-0">{{ form }}</pre>
     </b-card>
-    <!-- {{ posts }} -->
-     
+    {{ posts }} -->
   </div>
 </template>
 

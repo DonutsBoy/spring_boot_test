@@ -24,9 +24,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.View;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.demo.service.HelloService;
+import com.example.demo.service.JwtService;
 import com.example.demo.service.LoginTokenService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -41,7 +43,7 @@ public class HelloController {
 
 	@Autowired
 	LoginTokenService loginTokenService;
-
+	
 //    private final LoginTokenService loginTokenService;
 //    // 생성자 의존성 주입
 //    public HelloController(LoginTokenService loginTokenService) {
@@ -68,7 +70,7 @@ public class HelloController {
     @RequestMapping(value = "/api/login/session", method = RequestMethod.GET)
     public Map<String, Object> login(@RequestParam Map<String, Object> paramMap, HttpServletRequest request) throws InterruptedException {
     	Thread.sleep(500); //0.5초 대기        
-    	if ("admin".equals((String) paramMap.get("id"))) {
+    	if ("admin".equals(paramMap.get("id")) && "qwer1234".equals(paramMap.get("pw"))) {
         	HttpSession session = request.getSession(true);//HttpSession이 존재하면 현재 HttpSession을 반환하고 존재하지 않으면 새로 세션을 생성한다.(기본값:true)
             session.setAttribute("id", paramMap.get("id"));
             paramMap.put("success", true);
@@ -128,7 +130,6 @@ public class HelloController {
 
     @RequestMapping(value = "/api/helloInsert", method = RequestMethod.GET)
     public void helloInsert(HttpServletRequest request) {
-    	System.out.println("11111111111111");
     	helloService.helloInsert();
     }
     
@@ -136,7 +137,7 @@ public class HelloController {
     @RequestMapping(value = "/api/auto/dayProfit/select", method = RequestMethod.GET)
     public List<Map<String, Object>> dayProfitSelect(@RequestParam Map<String, Object> paramMap) throws InterruptedException {
     	logger.debug("zzzz : {}", paramMap.get("profitLossGubun"));
-    	Thread.sleep(500); //0.5초 대기
+    	Thread.sleep(300); //0.3초 대기
     	return helloService.dayProfitSelect(paramMap);
     }
 
@@ -164,6 +165,7 @@ public class HelloController {
     
     @RequestMapping(value = "/api/todo/checkBoxUpdate", method = RequestMethod.GET)
     public void todoCheckBoxUpdate(@RequestParam Map<String, Object> paramMap) throws Throwable {
+    	Thread.sleep(500); //0.5초 대기
     	helloService.todoCheckBoxUpdate(paramMap);
     }
  
@@ -196,5 +198,17 @@ public class HelloController {
 		
     	return hashMap;
     }
+    
+    @RequestMapping(value = "/api/upbit/account/select", method = RequestMethod.GET)
+    public List<Map<String, Object>> upbitAccountSelect(@RequestParam Map<String, Object> paramMap) throws InterruptedException {
+    	return loginTokenService.upbitAccountSelect(paramMap);
+    }    
+    
+    //엑셀다운로드
+    @RequestMapping(value = "/api/excel/download", method = RequestMethod.GET)
+    public View excelDownload() {
+    	logger.debug("excel download");
+    	return new SampleExcelView();
+    }    
     
 }

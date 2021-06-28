@@ -49,15 +49,14 @@ public class JwtService {
         } catch (JWTCreationException jwtCreationException) {
             logger.info(jwtCreationException.getLocalizedMessage());
         }
-
         return null;
     }
     
-    private Date expiresAt()  {
+    private Date expiresAt() {
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
         //cal.add(Calendar.HOUR, 744); // 한달 24 * 31
-        cal.add(Calendar.MINUTE, 3); // 3분
+        cal.add(Calendar.MINUTE, 5); // 5분
         return cal.getTime();
     }
 

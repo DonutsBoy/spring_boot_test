@@ -2,6 +2,7 @@
     <div>
         {{ complateTitle }} : <span :style="complateTodoCnt > 0 ? 'color:#ff0000' : 'color:#000000'">{{ complateTodoCnt }}건</span> ,
         미완료 : <span :style="incomplateTodoCnt > 0 ? 'color:#0000ff' : 'color:#000000'">{{ incomplateTodoCnt }}건</span>
+    	<div style="height:5px;" />        
     </div>
 </template>
 

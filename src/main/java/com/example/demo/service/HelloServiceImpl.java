@@ -14,6 +14,8 @@ import com.example.demo.dao.HelloDAO;
 import com.example.demo.mapper.HelloMapper;
 
 @Service
+//아래와 같은 역할을 한다. DEFAULT 는 기본값이다.
+@Transactional
 //sqlite3 에서 아래로 하면 잘됨
 //@Transactional(isolation=Isolation.DEFAULT)
 
@@ -24,7 +26,7 @@ import com.example.demo.mapper.HelloMapper;
 //어떤 사용자가 A라는 데이터를 B라는 데이터로 변경하는 동안 다른 사용자는 B라는 
 //아직 완료되지 않은(Uncommitted 혹은 Dirty) 데이터 B를 읽을 수 있다.
 //sqlite3에서 아래 설정으로 하면 서버처리 잘됨
-@Transactional(isolation=Isolation.READ_UNCOMMITTED)
+//@Transactional(isolation=Isolation.READ_UNCOMMITTED)
 
 //sqlite3 에서 아래로 하면 서버에서 500 (Internal Server Error) 리턴함
 //@Transactional(isolation=Isolation.REPEATABLE_READ)
@@ -50,6 +52,7 @@ public class HelloServiceImpl implements HelloService {
 	public void helloDelete() {
 		helloDAO.helloDelete();		
 	}
+	
 	public void helloInsert() {
 		helloDAO.helloInsert();		
 	}

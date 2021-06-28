@@ -25,6 +25,9 @@ JWT:
   ISSUER: TEST 
   # JWT 키 (여러 문자가 섞일수록 안전하다)
   SECRET: SeCrEtKeY4HaShInG  
+UPBIT:
+  ACCESSKEY: 5AS8xdYumK9TVlx9aMc4KbyaqcIhZ9bmfvEZmoCo
+  SECRETKEY: d1hDKqB5cT0qODaA78G2bIRSsdM3RCECvolz5Mnq  
 ---
 # -Dspring.profiles.active=dev 입력시 아래 설정 실행됨
 spring:
@@ -43,8 +46,11 @@ server:
 JWT:
   # 토큰 발급자
   ISSUER: TEST 
-  # JWT 키 (여러 문자가 섞일수록 안전하다)
+  # JWT 시크릿키 (여러 문자가 섞일수록 안전하다) (서버에서 시크릿키를 통해 액세스 토큰을 발급한다.)
   SECRET: SeCrEtKeY4HaShInG    
+UPBIT:
+  ACCESSKEY: 5AS8xdYumK9TVlx9aMc4KbyaqcIhZ9bmfvEZmoCo
+  SECRETKEY: d1hDKqB5cT0qODaA78G2bIRSsdM3RCECvolz5Mnq 
 ---
 spring:
   profiles: prod

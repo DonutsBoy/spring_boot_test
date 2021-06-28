@@ -2,13 +2,12 @@
   <div class="container">
     <b-card-group deck>
       <b-card
-        header="로그인상태"
-        title="타이틀"
+        header="코인 계좌 조회"
+        title="원화"
       >
-        <b-card-text>XXXXX</b-card-text>
+        <b-card-text>{{ krw_amt }}</b-card-text>
         <b-button href="#" variant="primary" @click="doLogout">로그아웃</b-button>
       </b-card>
-
       <b-card 
         :title=title 
         header-tag="header" 
@@ -22,6 +21,23 @@
         </b-overlay>        
       </b-card>
     </b-card-group>    
+
+    <div class="mt-3">
+      <b-card-group deck>
+        <b-card bg-variant="primary" text-variant="white" header="Primary" class="text-center">
+          <b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</b-card-text>
+        </b-card>
+
+        <b-card bg-variant="secondary" text-variant="white" header="Secondary" class="text-center">
+          <b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</b-card-text>
+        </b-card>
+
+        <b-card bg-variant="success" text-variant="white" header="Success" class="text-center">
+          <b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</b-card-text>
+        </b-card>
+      </b-card-group>
+    </div>
+
   </div>
 
 </template>
@@ -49,6 +65,7 @@ export default {
       opacity: 0.40,
       title: "코인명",
       price: 0,
+      krw_amt: 0,
     } 
   },
   methods: {
@@ -65,10 +82,24 @@ export default {
         console.log("error", error);
         alert(error);
       });
+
+      axios.get("/api/upbit/account/select", {
+        params: {}
+      }).then((response) => {
+        console.log(response.data);
+        this.krw_amt = String(parseInt(response.data[0].balance)).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' 원';
+        //this.krw_amt = String(response.data[0].balance).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 원";//천단위 콤마표시
+        // this.show = false;
+      }).catch((error) => {
+        console.log("error", error);
+        alert(error);
+      });
+      
     },
     doLogout() {
       
-      this.$store.commit('logoutToken');
+      //this.$store.commit('logoutToken');
+      this.$store.commit('logoutSession');      
 
       // axios.get("/api/logout", {
       //   params: {}
