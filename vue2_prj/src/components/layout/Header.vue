@@ -5,7 +5,7 @@
             <!-- <b-navbar-brand @click="isNavbarCollapseOpen = false" to="/"> -->
             <b-navbar-brand @click="brandClick" to="/" id="nav-brand">
             	<img src="/favicon.ico" class="d-inline-block align-top" alt="Kitten">
-            	Vue.js 스터디 2
+            	Vue.js 스터디
             </b-navbar-brand>
             <!-- <b-navbar-brand to="/">{{$store.state.data_1}}</b-navbar-brand> -->
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
